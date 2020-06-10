@@ -1,75 +1,65 @@
-**Visao Libertária - Documentação da API**
-----
+# **Visao Libertária - Documentação da API**
 
-**Base  URL**
-----
-https://www.visaolibertaria.com/
+> Documentação e exemplos de uso da API Visão Libertária.
 
+## **Base URL**
 
-**Endpoints**
-----
+https://www.visaolibertaria.com/api
 
-* Vídeos
-  * [GET - Listar Vídeos](#listar-vídeos)
-  * [GET - Listar Vídeos por Categoria](#listar-vídeos-por-categoria)
-  * [POST - Buscar Vídeos](#buscar-vídeos)
-* Matérias
-  * [GET - Listar Matérias](#listar-matérias)
-  * [GET - Listar Matérias por Categoria](#listar-matérias-por-categoria)
-  * [POST - Buscar Matérias](#buscar-matérias)
-* Pautas
-  * [GET - Listar Todas as Pautas](#listar-todas-as-pautas)
-  * [GET - Listar Últimas Pautas](#listar-últimas-pautas)
-  * [GET - Listar Pautas por Categoria](#listar-pautas-por-categoria)
-  * [POST - Buscar Pautas](#buscar-pautas)
+### **Endpoints**
+
+- Vídeos
+  - [GET - Listar Vídeos](#listar-vídeos)
+  - [GET - Listar Vídeos por Categoria](#listar-vídeos-por-categoria)
+  - [POST - Buscar Vídeos](#buscar-vídeos)
+- Matérias
+  - [GET - Listar Matérias](#listar-matérias)
+  - [GET - Listar Matérias por Categoria](#listar-matérias-por-categoria)
+  - [POST - Buscar Matérias](#buscar-matérias)
+- Pautas
+  - [GET - Listar Todas as Pautas](#listar-todas-as-pautas)
+  - [GET - Listar Últimas Pautas](#listar-últimas-pautas)
+  - [GET - Listar Pautas por Categoria](#listar-pautas-por-categoria)
+  - [POST - Buscar Pautas](#buscar-pautas)
 
 ---
 
-**Listar Vídeos**
-----
-Retorna lista de vídeos em formato json.
+#### **Listar Vídeos**
 
-* **URL**
+> Retorna lista de vídeos no formato JSON.
 
-  _/api/Video/List_
+- **URL:** _/Video/List_
 
-* **Method:**
+- **Method:** `GET`
 
-  `GET`
+- **Queries:**
 
-*  **Parâmetros da URL**
+  - `max=[integer]` - Quantidade de videos, default=10.
 
-   **Obrigatórios:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `max=[integer]`
-
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Video/List?ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url: "https://www.visaolibertaria.com/api/Video/List?ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -156,62 +146,54 @@ Retorna lista de vídeos em formato json.
           "Actions": [],
           "Status": 1,
           "StatusName": "Publicado"
-        },
+        }
       ]
     }
     ```
 
----
+  </details>
 
-**Listar Vídeos por Categoria**
-----
-Retorna lista de vídeos em formato json filtrada por categoria.
+</details>
 
-* **URL**
+#### **Listar Vídeos por Categoria**
 
-  _/api/Video/ByCategory_
+> Retorna uma lista de vídeos de acordo com a categoria no formato JSON.
 
-* **Method:**
+- **URL:** _/Video/ByCategory_
 
-  `GET`
+- **Method:** `GET`
 
-*  **Parâmetros da URL**
+- **Queries:**
 
-   **Obrigatórios:**
+  - `categ=[string]` - "theory", "news" ou "comic".
 
-   `categ=[string]` ["theory", "news", "comic"]
+  - `max=[integer]` - Quantidade de videos, default=10
 
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `max=[integer]`
-
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Video/ByCategory?categ=theory&ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url:
+      "https://www.visaolibertaria.com/api/Video/ByCategory?categ=theory&ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -271,58 +253,50 @@ Retorna lista de vídeos em formato json filtrada por categoria.
               }
             ]
           }
-        ]
-      }
+        }
+      ]
     }
     ```
 
----
+  </details>
 
-**Buscar Vídeos**
-----
-Retorna busca de vídeos em formato json.
+</details>
 
-* **URL**
+#### **Buscar Vídeos**
 
-  _/api/Video/Search_
+> Retorna busca de vídeos no formato JSON.
 
-* **Method:**
+- **URL:** _/Video/Search_
 
-  `GET`
+- **Method:** `POST`
 
-*  **Parâmetros da URL**
+- **Queries:**
 
-   **Obrigatórios:**
+  - `max=[integer]` - Quantidade de videos, default=10
 
-   `max=[integer]`
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   `SearchString=[string]`
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-
-* **Exemplo:**
-
-  ```javascript
-    $.post(
-      "https://www.visaolibertaria.com/api/Video/Search?ini=0&max=10",
-      { SearchString="teste" },
-      function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.post(
+    "https://www.visaolibertaria.com/api/Video/Search?ini=0&max=10",
+    { SearchString="teste" },
+    function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -410,53 +384,50 @@ Retorna busca de vídeos em formato json.
     }
     ```
 
-**Listar Matérias**
-----
-Retorna lista de matérias em formato json.
+  </details>
 
-* **URL**
+</details>
 
-  _/api/Article/List_
+---
 
-* **Method:**
+#### **Listar Matérias**
 
-  `GET`
+> Retorna lista de matérias no formato JSON.
 
-*  **Parâmetros da URL**
+- **URL:** _/Article/List_
 
-   **Obrigatórios:**
+- **Method:** `GET`
 
-   `max=[integer]`
+- **Queries:**
 
-   `sts=[integer]`
+  - `max=[integer]` - Quantidade de materias. default=10.
 
-   **Opcionais:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `ini=[integer]`
+  - `sts=[integer]`.
 
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Article/List?ini=0&max=10&sts=0",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url: "https://www.visaolibertaria.com/api/Article/List?ini=0&max=10&sts=0",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -615,61 +586,54 @@ Retorna lista de matérias em formato json.
           "beingRevisedName": "Marco_Batalha",
           "beingNarratedName": "salander",
           "beingProducedName": "AJ"
-        },
+        }
       ]
     }
-
     ```
 
+  </details>
 
-**Listar Matérias por Categoria**
-----
-Retorna lista de matérias em formato json filtrada por categoria.
+</details>
 
-* **URL**
+#### **Listar Matérias por Categoria**
 
-  _/api/Article/ByCategory_
+> Retorna lista de matérias de acordo com a categoria no formato JSON.
 
-* **Method:**
+- **URL:** _/Article/ByCategory_
 
-  `GET`
+- **Method:** `GET`
 
-*  **Parâmetros da URL**
+- **Queries:**
 
-   **Obrigatórios:**
+  - `categ=[string]` ["theory", "news", "comic"]
 
-   `categ=[string]` ["theory", "news", "comic"]
+  - `max=[integer]` - Quantidade de materias. default=10.
 
-   `max=[integer]`
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Article/ByCategory?categ=news&ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url:
+      "https://www.visaolibertaria.com/api/Article/ByCategory?categ=news&ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -844,44 +808,34 @@ Retorna lista de matérias em formato json filtrada por categoria.
         }
       ]
     }
-
     ```
 
----
+  </details>
 
+</details>
 
+#### **Buscar Matérias**
 
+> Retorna busca de matérias no formato JSON.
 
-**Buscar Matérias**
-----
-Retorna busca de matérias em formato json.
+- **URL:** _/Article/Search_
 
-* **URL**
+- **Method:** `POST`
 
-  _/api/Article/Search_
+- **Queries:**
 
-* **Method:**
+  - `max=[integer]` - Quantidade de materias. default=10.
 
-  `GET`
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-*  **Parâmetros da URL**
-
-   **Obrigatórios:**
-
-   `max=[integer]`
-
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   `SearchString=[string]`
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
+  ```js
     $.post(
       "https://www.visaolibertaria.com/api/Article/Search?token=&ini=0&max=10",
       { SearchString="teste" },
@@ -891,11 +845,10 @@ Retorna busca de matérias em formato json.
     });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -1063,51 +1016,48 @@ Retorna busca de matérias em formato json.
     }
     ```
 
+  </details>
 
-**Listar Todas as Pautas**
-----
-Retorna lista de pautas em formato json.
+</details>
 
-* **URL**
+---
 
-  _/api/Target/ListAll_
+#### **Listar Todas as Pautas**
 
-* **Method:**
+> Retorna lista de pautas no formato JSON.
 
-  `GET`
+- **URL:** _/Target/ListAll_
 
-*  **Parâmetros da URL**
+- **Method:** `GET`
 
-   **Obrigatórios:**
+- **Queries:**
 
-   `max=[integer]`
+  - `max=[integer]` - Quantidade de pautas, default=10.
 
-   **Opcionais:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
-* **Exemplo:**
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Target/ListAll?ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url: "https://www.visaolibertaria.com/api/Target/ListAll?ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -1176,56 +1126,48 @@ Retorna lista de pautas em formato json.
         }
       ]
     }
-
     ```
 
+  </details>
 
+</details>
 
-**Listar Últimas Pautas**
-----
-Retorna lista de pautas em formato json.
+#### **Listar Últimas Pautas**
 
-* **URL**
+> Retorna lista de pautas no formato JSON.
 
-  _/api/Target/List_
+- **URL:** _/Target/List_
 
-* **Method:**
+- **Method:** `GET`
 
-  `GET`
+- **Queries:**
 
-*  **Parâmetros da URL**
+  - `max=[integer]` - Quantidade de pautas, default=10.
 
-   **Obrigatórios:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `max=[integer]`
-
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Target/List?ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url: "https://www.visaolibertaria.com/api/Target/List?ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -1303,59 +1245,54 @@ Retorna lista de pautas em formato json.
           "Actions": [],
           "Status": 1,
           "StatusName": "Registrado"
-        },
+        }
       ]
     }
-
     ```
 
-**Listar Pautas por Categoria**
-----
-Retorna lista de pautas em formato json filtrada por categoria.
+  </details>
 
-* **URL**
+</details>
 
-  _/api/Target/ByCategory_
+#### **Listar Pautas por Categoria**
 
-* **Method:**
+> Retorna lista de pautas no formato JSON filtrada por categoria.
 
-  `GET`
+- **URL:** _/Target/ByCategory_
 
-*  **Parâmetros da URL**
+- **Method:** `GET`
 
-   **Obrigatórios:**
+- **Queries:**
 
-   `categ=[string]` ["suggested", "news", "comic"]
+  - `categ=[string]` "suggested", "news" ou "comic".
 
-   `max=[integer]`
+  - `max=[integer]` - Quantidade de pautas, default=10.
 
-   **Opcionais:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   Nenhum.
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
-    $.ajax({
-      url: "https://www.visaolibertaria.com/api/Target/ByCategory?categ=suggested&ini=0&max=10",
-      dataType: "json",
-      type : "GET",
-      success : function(res) {
-        console.log(res);
-      }
-    });
+  ```js
+  $.ajax({
+    url:
+      "https://www.visaolibertaria.com/api/Target/ByCategory?categ=suggested&ini=0&max=10",
+    dataType: "json",
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    }
+  });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -1394,45 +1331,38 @@ Retorna lista de pautas em formato json filtrada por categoria.
                 "Category": "Liberdade de expressão"
               }
             ]
-          },
+          }
         }
       ]
     }
     ```
 
----
+  </details>
 
+</details>
 
-**Buscar Pautas**
-----
-Retorna busca de pautas em formato json.
+#### **Buscar Pautas**
 
-* **URL**
+> Retorna busca de pautas no formato JSON.
 
-  _/api/Target/Search_
+- **URL:** _/Target/Search_
 
-* **Method:**
+- **Method:** `POST`
 
-  `GET`
+- **Queries:**
 
-*  **Parâmetros da URL**
+  - `max=[integer]` - Quantidade de pautas, default=10.
 
-   **Obrigatórios:**
+  - `ini=[integer]` - Inicio da lista de resultados, default=0.
 
-   `max=[integer]`
-
-   **Opcionais:**
-
-   `ini=[integer]`
-
-* **Data Params**
+- **Body:**
 
   `SearchString=[string]`
 
+- <details open>
+  <summary><b>Exemplo:</b></summary>
 
-* **Exemplo:**
-
-  ```javascript
+  ```js
     $.post(
       "https://www.visaolibertaria.com/api/Target/Search?ini=0&max=10",
       { SearchString="teste" },
@@ -1442,11 +1372,10 @@ Retorna busca de pautas em formato json.
     });
   ```
 
-* **Success Response:**
+  - <details>
+    <summary><b>Success Response:</b></summary>
 
-  * **Code:** 200 <br />
-    **Content:**
-    ```
+    ```json
     {
       "Result": 0,
       "ResultComplement": "",
@@ -1495,9 +1424,18 @@ Retorna busca de pautas em formato json.
                 "Category": "Riqueza"
               }
             ]
-          },
+          }
         }
       ]
     }
-
     ```
+
+  </details>
+
+</details>
+
+<div align="center">
+
+> Imposto é roubo!
+
+</div>
